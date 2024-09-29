@@ -4,7 +4,7 @@
     Dim pCOde As String
     Dim firstdName As String
     Dim secondDname
-    Dim mNumber As Integer
+    Dim mNumber As string
     Dim rtotal As Single
     Dim fItem As String
     Dim deci As String
@@ -17,6 +17,8 @@
     Dim password As String
     Dim correctPassword As String
     Dim counter1 As Integer
+    Dim invalid_mNumber as boolean
+    dim invalid_mNumber2 as boolean
 
 
 
@@ -152,32 +154,45 @@
             Loop Until dob <> ""
 
 
+console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
+            
+            
+            do 
+                
+                invalid_mNumber = false
+                
 
+                mNumber = console.ReadLine()
 
-
-
-            console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
-
-            mNumber = console.ReadLine()
-
-            If mNumber = 1 Then
-                console.WriteLine("Hot Chocolate - 2.99
+                If mNumber = "1" Then
+                    console.WriteLine("Hot Chocolate - 2.99
 Americano - 3.99
 Latte - 1.99
 Black coffee - 0.99")
 
-            ElseIf mNumber = 2 Then
-                console.WriteLine("Iced coffee - 1.99
+                ElseIf mNumber = "2" Then
+                    console.WriteLine("Iced coffee - 1.99
 Iced Moccha - 3.99
 Iced Latte - 4.99")
 
-            ElseIf mNumber = 3 Then
-                console.WriteLine("Pan au chocolate - 0.99
+                ElseIf mNumber = "3" Then
+                    console.WriteLine("Pan au chocolate - 0.99
 Crossaint - 1.99
 Cinnamon Bun - 3.50")
+                
+                else
+                    invalid_mNumber = True
+                    Console.WriteLine("Invalid Input,Try again")
+                    
+                    
 
 
-            End If
+                End If
+                
+            Loop while invalid_mNumber = true
+
+
+           
 
             While rtotal = 0
 
@@ -263,29 +278,40 @@ Cinnamon Bun - 3.50")
 
 
             If deci = "yes" Then
+                
+                do 
+                    invalid_mNumber2 = false
+                    console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
-                console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
+                    mNumber = console.ReadLine()
 
-                mNumber = console.ReadLine()
-
-                If mNumber = 1 Then
-                    console.WriteLine("Hot Chocolate - 2.99
+                    If mNumber = 1 Then
+                        console.WriteLine("Hot Chocolate - 2.99
 Americano - 3.99
 Latte - 1.99
 Black coffee - 0.99")
 
-                ElseIf mNumber = 2 Then
-                    console.WriteLine("Iced coffee - 1.99
+                    ElseIf mNumber = 2 Then
+                        console.WriteLine("Iced coffee - 1.99
 Iced Moccha - 3.99
 Iced Latte - 4.99")
 
-                ElseIf mNumber = 3 Then
-                    console.WriteLine("Pan au chocolate - 0.99
+                    ElseIf mNumber = 3 Then
+                        console.WriteLine("Pan au chocolate - 0.99
 Crossaint - 1.99
 Cinnamon Bun - 3.50")
+                    
+                    else 
+                        invalid_mNumber2 = True
+                        console.WriteLine("Invalid input try again")
+                        
 
 
-                End If
+                    End If
+                    
+                Loop while invalid_mNumber2 = true
+
+                
 
                 console.WriteLine("What would you like to add to your order")
 
