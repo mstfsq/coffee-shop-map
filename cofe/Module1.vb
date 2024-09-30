@@ -17,8 +17,16 @@
     Dim password As String
     Dim correctPassword As String
     Dim counter1 As Integer
-    Dim invalid_mNumber as boolean
-    dim invalid_mNumber2 as boolean
+    Dim invalid_mNumber as Boolean
+    Dim invalid_mNumber2 As Boolean
+    Dim orderline(6) As String
+    Dim index As Integer
+    ' Orderline 1 is phone number
+    ' orderline 2 is postcode
+    ' orderline 3 is first name
+    ' orderline 4 is second name
+    ' orderline 5 is dob
+    ' orderline 6 is taxedtotal
 
 
 
@@ -113,16 +121,20 @@
                 pNumber = console.ReadLine()
             Loop Until pNumber <> "" ' presence check
 
+            orderline(1) = pNumber
+
             Do
                 console.WriteLine("And please could you also input your postcode ?")
                 pCOde = console.ReadLine()
 
             Loop Until pCOde <> ""
 
+            orderline(2) = pCOde
 
 
 
-            console.WriteLine("What is the first name for the delivery?")
+
+            Console.WriteLine("What is the first name for the delivery?")
             firstdName = console.ReadLine()
 
 
@@ -140,6 +152,8 @@
 
             Loop Until firstdName <> "" And lofname < 10
 
+            orderline(3) = firstdName
+
             Do
 
                 console.WriteLine("What is the second name for the delivery?")
@@ -147,20 +161,23 @@
 
             Loop Until secondDname <> ""
 
+            orderline(4) = secondDname
+
 
             Do
                 console.WriteLine("Please input DOB in format DDMM")
                 dob = console.ReadLine()
             Loop Until dob <> ""
 
+            orderline(5) = dob
 
-console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
-            
-            
-            do 
-                
-                invalid_mNumber = false
-                
+            Console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
+
+
+            Do
+
+                invalid_mNumber = False
+
 
                 mNumber = console.ReadLine()
 
@@ -179,20 +196,20 @@ Iced Latte - 4.99")
                     console.WriteLine("Pan au chocolate - 0.99
 Crossaint - 1.99
 Cinnamon Bun - 3.50")
-                
-                else
+
+                Else
                     invalid_mNumber = True
                     Console.WriteLine("Invalid Input,Try again")
-                    
-                    
+
+
 
 
                 End If
-                
-            Loop while invalid_mNumber = true
+
+            Loop While invalid_mNumber = True
 
 
-           
+
 
             While rtotal = 0
 
@@ -278,9 +295,9 @@ Cinnamon Bun - 3.50")
 
 
             If deci = "yes" Then
-                
-                do 
-                    invalid_mNumber2 = false
+
+                Do
+                    invalid_mNumber2 = False
                     console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
                     mNumber = console.ReadLine()
@@ -300,18 +317,18 @@ Iced Latte - 4.99")
                         console.WriteLine("Pan au chocolate - 0.99
 Crossaint - 1.99
 Cinnamon Bun - 3.50")
-                    
-                    else 
+
+                    Else
                         invalid_mNumber2 = True
                         console.WriteLine("Invalid input try again")
-                        
+
 
 
                     End If
-                    
-                Loop while invalid_mNumber2 = true
 
-                
+                Loop While invalid_mNumber2 = True
+
+
 
                 console.WriteLine("What would you like to add to your order")
 
@@ -445,8 +462,8 @@ Cinnamon Bun - 3.50")
 
 
 
-            console.WriteLine("Your final total is " & taxedtotal)
-            console.WriteLine("Please press <ENTER> to input your card")
+            Console.WriteLine("Your final total is " & FormatCurrency(FormatNumber(taxedtotal), 2), 2)
+            Console.WriteLine("Please press <ENTER> to input your card")
             console.ReadLine()
 
             console.WriteLine("Transaction Approved")
@@ -455,7 +472,9 @@ Cinnamon Bun - 3.50")
 
             console.WriteLine("Would you like the program to loop?")
 
-            lop = console.ReadLine()
+            lop = Console.ReadLine()
+
+            orderline(6) = taxedtotal
 
 
 
@@ -463,9 +482,19 @@ Cinnamon Bun - 3.50")
 
 
         Loop Until lop = "NO"
+        index = 1
+
+        For index = 1 To 6
+            Console.WriteLine(orderline(index))
+        Next
+        ' Orderline 1 is phone number
+        ' orderline 2 is postcode
+        ' orderline 3 is first name
+        ' orderline 4 is second name
+        ' orderline 5 is dob
+        ' orderline 6 is taxedtotal
 
 
-        
 
 
 
@@ -479,7 +508,7 @@ Cinnamon Bun - 3.50")
 
 
 
-        console.WriteLine("Press <ENTER> to terminate program")
+        Console.WriteLine("Press <ENTER> to terminate program")
         console.ReadLine()
         
 
