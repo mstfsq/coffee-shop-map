@@ -32,7 +32,7 @@
 
 
 
-
+'' password check at the start of the program
     Sub security()
         counter1 = 0
         correctPassword = ("JCC")
@@ -68,7 +68,7 @@
 
 
     End Sub
-
+'' if user does not tip this tells them how much they would of paid with the tip and it used ByVal
 
     Sub pTip(ByVal taxedtotal)
         Dim tip_amount As Single = taxedtotal * 1.05
@@ -77,6 +77,8 @@
 
     End Sub
 
+    
+    ' if users id number starts with 'd' it will apply student discount
     Sub studentDiscount(ByRef taxedtotal)
         console.WriteLine("Please enter your ID Number,press <enter> if you do not have one")
         Dim id_number As String = console.ReadLine()
@@ -107,7 +109,7 @@
 
 
 
-
+' main program
     Sub Main()
 
         security()
@@ -115,18 +117,27 @@
 
         Do
             rtotal = 0
+            
+            console.WriteLine("Welcome to M's Coffee.Could you please provide your phone number?")
 
             Do
-                console.WriteLine("Welcome to M's Coffee.Could you please provide your phone number?")
+                
                 pNumber = console.ReadLine()
-            Loop Until pNumber <> "" ' presence check
+                
+                if pnumber <> "" or Len(pnumber) > 11 Then
+                    Console.WriteLine("invalid input,please make sure phone number is no more than 11 digits")
+                    
+                End If
+                '' loops untill the input is real and less than/equal to 11 digits
+            Loop Until pNumber <> "" and Len(pNumber) <= 11
 
             orderline(1) = pNumber
 
             Do
                 console.WriteLine("And please could you also input your postcode ?")
                 pCOde = console.ReadLine()
-
+' loops untill there is real input for postcode
+                
             Loop Until pCOde <> ""
 
             orderline(2) = pCOde
@@ -138,7 +149,7 @@
             firstdName = console.ReadLine()
 
 
-
+'' loops untill legnth of first name is less than 10 and has real input
             Do
                 lofname = Len(firstdName)
 
@@ -153,27 +164,35 @@
             Loop Until firstdName <> "" And lofname < 10
 
             orderline(3) = firstdName
-
+            
+            console.WriteLine("What is the second name for the delivery?")
+' loops unill second name has real input
             Do
-
-                console.WriteLine("What is the second name for the delivery?")
                 secondDname = console.ReadLine()
+                if secondDname = "" Then
+                    Console.writeline("Invalid input,please try again")
+                End If
 
-            Loop Until secondDname <> ""
+            Loop Until secondDname <> "" 
 
             orderline(4) = secondDname
+            
+            console.WriteLine("Please input DOB in format DDMM")
 
-
+' loops untill len(dob) = 4 and input is real
             Do
-                console.WriteLine("Please input DOB in format DDMM")
+                
                 dob = console.ReadLine()
-            Loop Until dob <> ""
+                if dob = "" or Len(dob) <> 4 Then
+                    Console.WriteLine("Invlaid DOB input,please make sure the format is DDMM")
+                End If
+            Loop Until dob <> "" and Len(dob) = 4
 
             orderline(5) = dob
 
             Console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
-
+'' makes sure the inputed number is appropiate if not it will loop
             Do
 
                 invalid_mNumber = False
@@ -415,7 +434,7 @@ Cinnamon Bun - 3.50")
 
 
 
-
+'' prints out a reciept
             console.WriteLine("Name: " & UCase(identifier))
             console.WriteLine("Phone number: " & pNumber)
             console.WriteLine("Post code : " & pCOde)
@@ -425,7 +444,7 @@ Cinnamon Bun - 3.50")
             Dim tipdec As String
 
 
-
+'' if the total is less than 10 it will ask for a 5% tip
 
             If rtotal < 10 Then
 
@@ -442,7 +461,7 @@ Cinnamon Bun - 3.50")
                 ' add 5% to the total to make for tip
                 taxedtotal = rtotal * 1.05
                 console.WriteLine("Your new total is " & FormatCurrency(FormatNumber(taxedtotal), 2), 2)
-
+'' refers to "you would of payed xyz" submodule 
             Else
                 pTip(taxedtotal)
 
@@ -451,7 +470,7 @@ Cinnamon Bun - 3.50")
             Dim Sdiscount As String
 
 
-
+' student submodule
             studentDiscount(taxedtotal)
 
 
