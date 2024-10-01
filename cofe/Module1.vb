@@ -21,6 +21,7 @@
     Dim invalid_mNumber2 As Boolean
     Dim orderline(6) As String
     Dim index As Integer
+    'orderline 0 is the total
     ' Orderline 1 is phone number
     ' orderline 2 is postcode
     ' orderline 3 is first name
@@ -484,6 +485,8 @@ Cinnamon Bun - 3.50")
 
             End If
 
+
+            orderline(0) = rtotal
             Dim cash As Single
             Dim change As Single
             Dim pMeth As String
@@ -493,7 +496,7 @@ Cinnamon Bun - 3.50")
 
             Const TAX As Single = 1.2
 
-            taxedtotal = rtotal * 1.2
+            taxedtotal = rtotal * TAX
 
 
             Dim identifier As String
@@ -585,9 +588,9 @@ Cinnamon Bun - 3.50")
 
 
         Loop Until lop = "NO"
-        index = 1
+        index = 0
 
-        For index = 1 To 6
+        For index = 0 To 6
             Console.WriteLine(orderline(index))
         Next
         ' Orderline 1 is phone number
