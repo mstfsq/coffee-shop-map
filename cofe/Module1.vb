@@ -46,6 +46,8 @@
                 password = console.ReadLine()
 
             Loop Until counter1 = 3 Or password = correctPassword
+            
+            
 
             If password = correctPassword Then
                 console.WriteLine("Correct password entered.Welcome")
