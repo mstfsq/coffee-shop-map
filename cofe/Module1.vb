@@ -27,6 +27,63 @@
     ' orderline 4 is second name
     ' orderline 5 is dob
     ' orderline 6 is taxedtotal
+    
+    
+    
+    '' cash payment system
+    
+    
+    Sub p_cash()
+        dim cash_input as single
+        dim change_due as single
+        dim moneyOwed as single
+        dim money_given as single
+        dim repayment as single
+    
+        Console.WriteLine("Yout total is " & taxedtotal & "How much would you like to pay in cash")
+        cash_input = console.ReadLine()
+        
+        change_due = cash_input - taxedtotal
+        
+        if change_due > 0 then
+        
+        Console.WriteLine("your change is £" & change_due)
+            
+            End If
+        
+        
+        if change_due < 0 then
+            Console.WriteLine("uhoh,you did not give enough cash")
+            moneyOwed = change_due * -1
+            Console.WriteLine("You owe £" & moneyOwed)
+            
+            Console.WriteLine("how much more would you like to pay")
+            money_given = console.ReadLine()
+            
+            if money_given < moneyOwed Then
+                moneyOwed = moneyowed - money_given
+                
+                do until moneyowed <= 0
+                
+                    Console.WriteLine("you still owe £" & moneyowed & " plese pay the due amount")
+                    money_given = console.ReadLine()
+                    moneyOwed = moneyOwed - money_given
+                loop 
+                
+                if moneyOwed < 0 Then
+                    Console.WriteLine("Your change is " & moneyOwed * -1)
+                End If
+            End If
+            
+            
+            
+        End If
+        
+        
+        
+    End Sub
+
+
 
 
 
@@ -485,8 +542,17 @@ Cinnamon Bun - 3.50")
 
 
             Console.WriteLine("Your final total is " & FormatNumber(taxedtotal), 2)
-            Console.WriteLine("Please press <ENTER> to input your card")
-            console.ReadLine()
+            Console.WriteLine("would you like to pay cash or card")
+            dim p_decision as string = LCase(console.ReadLine())
+            if p_decision = "cash" Then
+                
+                p_cash()
+                
+                
+                else
+                    Console.writeline("Press <ENTER> to input your card")
+                    Console.ReadLine()
+            End If
 
             console.WriteLine("Transaction Approved")
 
