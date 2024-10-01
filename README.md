@@ -18,9 +18,8 @@ Calculate their change
 Present the user with a receipt of their order
 
 Add VAT to the Total Bill being 20 % using a constant
- Add to the users receipt the customer’s name in the format MR ZMORAN (Zeon Moran) all
-uppercase or lowercase.
- On the receipt give the user an account reference number being ZMORAN2709 Format of
+ 
+ On the receipt give the user an account reference number being JDOE079 Format of
 1st letter of first name, concatenate last name, concatenate 2 digits for day of birth and 2
 digits for month of birth. All must be displayed in either upper case or lower case.
  Display total cost formatted to currency
