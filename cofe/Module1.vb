@@ -88,6 +88,7 @@
             taxedtotal = FormatNumber(taxedtotal * 0.9, 2)
 
         ElseIf id_number = "" Then
+        
 
 
 
@@ -124,7 +125,7 @@
                 
                 pNumber = console.ReadLine()
                 
-                if pnumber <> "" or Len(pnumber) > 11 Then
+                if pnumber = "" or Len(pnumber) > 12 Then
                     Console.WriteLine("invalid input,please make sure phone number is no more than 11 digits")
                     
                 End If
@@ -460,7 +461,7 @@ Cinnamon Bun - 3.50")
 
                 ' add 5% to the total to make for tip
                 taxedtotal = rtotal * 1.05
-                console.WriteLine("Your new total is " & FormatCurrency(FormatNumber(taxedtotal), 2), 2)
+                console.WriteLine("Your new total is " & FormatNumber(taxedtotal), 2)
 '' refers to "you would of payed xyz" submodule 
             Else
                 pTip(taxedtotal)
@@ -481,7 +482,7 @@ Cinnamon Bun - 3.50")
 
 
 
-            Console.WriteLine("Your final total is " & FormatCurrency(FormatNumber(taxedtotal), 2), 2)
+            Console.WriteLine("Your final total is " & FormatNumber(taxedtotal), 2)
             Console.WriteLine("Please press <ENTER> to input your card")
             console.ReadLine()
 
@@ -512,45 +513,11 @@ Cinnamon Bun - 3.50")
         ' orderline 4 is second name
         ' orderline 5 is dob
         ' orderline 6 is taxedtotal
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
         Console.WriteLine("Press <ENTER> to terminate program")
         console.ReadLine()
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     End Sub
 
