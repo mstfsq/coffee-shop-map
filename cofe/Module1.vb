@@ -4,7 +4,7 @@
     Dim pCOde As String
     Dim firstdName As String
     Dim secondDname
-    Dim mNumber As string
+    Dim mNumber As String
     Dim rtotal As Single
     Dim fItem As String
     Dim deci As String
@@ -17,70 +17,87 @@
     Dim password As String
     Dim correctPassword As String
     Dim counter1 As Integer
-    Dim invalid_mNumber as Boolean
+    Dim invalid_mNumber As Boolean
     Dim invalid_mNumber2 As Boolean
-    Dim orderline(6) As String
-    Dim index As Integer
-    ' Orderline 1 is phone number
+    Dim orderline(4, 6) As String
+    Dim index, ArrayCounter As Integer
+    ' orderline 0 is the total
+    ' orderline 1 is phone number
     ' orderline 2 is postcode
     ' orderline 3 is first name
     ' orderline 4 is second name
     ' orderline 5 is dob
     ' orderline 6 is taxedtotal
-    
-    
-    
+    Dim array_3d As Integer = 0
+
+
+
     '' cash payment system
-    
-    
+
+
     Sub p_cash()
-        dim cash_input as single
-        dim change_due as single
-        dim moneyOwed as single
-        dim money_given as single
-        dim repayment as single
-    
-        Console.WriteLine("Yout total is " & taxedtotal & "How much would you like to pay in cash")
-        cash_input = console.ReadLine()
-        
+        Dim cash_input As Single
+        Dim change_due As Single
+        Dim moneyOwed As Single
+        Dim money_given As Single
+
+
+        ' displays how much the customer needs to owe
+        taxedtotal = Math.Round(taxedtotal, 2)
+        Console.WriteLine("Yout total is £" & taxedtotal & "How much would you like to pay in cash")
+        cash_input = Console.ReadLine()
+
+        ' works out the change
+
         change_due = cash_input - taxedtotal
-        
-        if change_due > 0 then
-        
-        Console.WriteLine("your change is £" & change_due)
-            
-            End If
-        
-        
-        if change_due < 0 then
+
+        ' if change is positive(they gave more than req) then output the change
+        If change_due > 0 Then
+
+            Console.WriteLine("your change is £" & FormatNumber(change_due), 2)
+
+        End If
+
+        ' if change is less then 0(they didnt give enough)
+        If change_due < 0 Then
             Console.WriteLine("uhoh,you did not give enough cash")
-            moneyOwed = change_due * -1
-            Console.WriteLine("You owe £" & moneyOwed)
-            
+            ' makes the change into the debt they owe and assign it to moneyOwed
+            moneyOwed = Math.Round(change_due * -1, 2)
+            Console.WriteLine("You owe £" & FormatNumber(moneyOwed), 2)
+            ' tells them to give more money and assigns the money given to money_given
             Console.WriteLine("how much more would you like to pay")
-            money_given = console.ReadLine()
-            
-            if money_given < moneyOwed Then
-                moneyOwed = moneyowed - money_given
-                
-                do until moneyowed <= 0
-                
-                    Console.WriteLine("you still owe £" & moneyowed & " plese pay the due amount")
-                    money_given = console.ReadLine()
+            money_given = Console.ReadLine()
+
+            ' if the money given is less than the money they owe
+
+            If money_given < moneyOwed Then
+                ' it calculates the rest they owe
+                moneyOwed = moneyOwed - money_given
+
+                ' slaps it into a loop which loops untll the moneyOwed is 0 or less than zero
+                '
+
+                Do Until moneyOwed <= 0
+
+                    Console.WriteLine("you still owe £" & FormatNumber(moneyOwed, 2) & " plese pay the due amount")
+                    money_given = Console.ReadLine()
+                    'following calculation takes away the money given to moneyowed becomes less each time
                     moneyOwed = moneyOwed - money_given
-                loop 
-                
-                if moneyOwed < 0 Then
-                    Console.WriteLine("Your change is " & moneyOwed * -1)
+                Loop
+
+                'if the money owed is more than 0 it means they have given more than needed so it prints out the change
+
+                If moneyOwed < 0 Then
+                    Console.WriteLine("Your change is £" & FormatNumber(moneyOwed, 2) * -1)
                 End If
             End If
-            
-            
-            
+
+
+
         End If
-        
-        
-        
+
+
+
     End Sub
 
 
@@ -89,29 +106,29 @@
 
 
 
-'' password check at the start of the program
+    '' password check at the start of the program
     Sub security()
         counter1 = 0
         correctPassword = ("JCC")
-        console.WriteLine("Please enter master password")
-        password = console.ReadLine()
+        Console.WriteLine("Please enter master password")
+        password = Console.ReadLine()
 
         If password <> correctPassword Then
             Do
                 counter1 = counter1 + 1
-                console.WriteLine("Incorrect password,you have " & 3 - counter1 & " Reamining attemps.")
-                password = console.ReadLine()
+                Console.WriteLine("Incorrect password,you have " & 3 - counter1 & " Reamining attemps.")
+                password = Console.ReadLine()
 
             Loop Until counter1 = 3 Or password = correctPassword
-            
-            
+
+
 
             If password = correctPassword Then
-                console.WriteLine("Correct password entered.Welcome")
+                Console.WriteLine("Correct password entered.Welcome")
 
             Else
-                console.WriteLine("You have entered a incorrect password too many times.Program will now terminate")
-                console.ReadLine()
+                Console.WriteLine("You have entered a incorrect password too many times.Program will now terminate")
+                Console.ReadLine()
                 End
 
 
@@ -127,32 +144,32 @@
 
 
     End Sub
-'' if user does not tip this tells them how much they would of paid with the tip and it used ByVal
+    '' if user does not tip this tells them how much they would of paid with the tip and it used ByVal
 
     Sub pTip(ByVal taxedtotal)
         Dim tip_amount As Single = taxedtotal * 1.05
-        console.WriteLine("If you would of gave a tip your total would of been " & FormatNumber(tip_amount, 2))
+        Console.WriteLine("If you would of gave a tip your total would of been £" & FormatNumber(tip_amount, 2))
 
 
     End Sub
 
-    
+
     ' if users id number starts with 'd' it will apply student discount
     Sub studentDiscount(ByRef taxedtotal)
-        console.WriteLine("Please enter your ID Number,press <enter> if you do not have one")
-        Dim id_number As String = console.ReadLine()
+        Console.WriteLine("Please enter your ID Number,press <enter> if you do not have one")
+        Dim id_number As String = Console.ReadLine()
 
         If LCase(Mid(id_number, 1, 1)) = "d" Then
-            console.WriteLine("Student number found.You are eligible for the 10% off student discount")
+            Console.WriteLine("Student number found.You are eligible for the 10% off student discount")
             taxedtotal = FormatNumber(taxedtotal * 0.9, 2)
 
         ElseIf id_number = "" Then
-        
+
 
 
 
         Else
-            console.WriteLine("Unfortuately you are not eligible for the student discount")
+            Console.WriteLine("Unfortuately you are not eligible for the student discount")
             taxedtotal = taxedtotal
 
 
@@ -169,110 +186,118 @@
 
 
 
-' main program
+    ' main program
     Sub Main()
+
+
 
         security()
 
 
+
+
+
+
         Do
             rtotal = 0
-            
-            console.WriteLine("Welcome to M's Coffee.Could you please provide your phone number?")
+
+            Console.WriteLine("Welcome to M's Coffee.Could you please provide your phone number?")
 
             Do
-                
-                pNumber = console.ReadLine()
-                
-                if pnumber = "" or Len(pnumber) > 12 Then
+
+                pNumber = Console.ReadLine()
+
+                If pNumber = "" Or Len(pNumber) > 12 Then
                     Console.WriteLine("invalid input,please make sure phone number is no more than 11 digits")
-                    
+
                 End If
                 '' loops untill the input is real and less than/equal to 11 digits
-            Loop Until pNumber <> "" and Len(pNumber) <= 11
+            Loop Until pNumber <> "" And Len(pNumber) <= 11
 
-            orderline(1) = pNumber
+            orderline(0, 1) = pNumber
 
             Do
-                console.WriteLine("And please could you also input your postcode ?")
-                pCOde = console.ReadLine()
-' loops untill there is real input for postcode
-                
+                Console.WriteLine("And please could you also input your postcode ?")
+                pCOde = Console.ReadLine()
+                ' loops untill there is real input for postcode
+
             Loop Until pCOde <> ""
 
-            orderline(2) = pCOde
+            orderline(0, 2) = pCOde
 
 
 
 
             Console.WriteLine("What is the first name for the delivery?")
-            firstdName = console.ReadLine()
+            firstdName = Console.ReadLine()
 
 
-'' loops untill legnth of first name is less than 10 and has real input
+            '' loops untill legnth of first name is less than 10 and has real input
             Do
                 lofname = Len(firstdName)
 
                 If lofname > 10 Or firstdName = "" Then
-                    console.WriteLine("Invalid Input,Please reinput name")
+                    Console.WriteLine("Invalid Input,Please reinput name")
 
-                    firstdName = console.ReadLine()
+
+
+                    firstdName = Console.ReadLine()
 
                 End If
 
 
             Loop Until firstdName <> "" And lofname < 10
 
-            orderline(3) = firstdName
-            
-            console.WriteLine("What is the second name for the delivery?")
-' loops unill second name has real input
+            orderline(0, 3) = firstdName
+
+            Console.WriteLine("What is the second name for the delivery?")
+            ' loops unill second name has real input
             Do
-                secondDname = console.ReadLine()
-                if secondDname = "" Then
-                    Console.writeline("Invalid input,please try again")
+                secondDname = Console.ReadLine()
+                If secondDname = "" Then
+                    Console.WriteLine("Invalid input,please try again")
                 End If
 
-            Loop Until secondDname <> "" 
+            Loop Until secondDname <> ""
 
-            orderline(4) = secondDname
-            
-            console.WriteLine("Please input DOB in format DDMM")
+            orderline(0, 4) = secondDname
 
-' loops untill len(dob) = 4 and input is real
+            Console.WriteLine("Please input DOB in format DDMM")
+
+            ' loops untill len(dob) = 4 and input is real
             Do
-                
-                dob = console.ReadLine()
-                if dob = "" or Len(dob) <> 4 Then
+
+                dob = Console.ReadLine()
+                If dob = "" Or Len(dob) <> 4 Then
                     Console.WriteLine("Invlaid DOB input,please make sure the format is DDMM")
                 End If
-            Loop Until dob <> "" and Len(dob) = 4
+            Loop Until dob <> "" And Len(dob) = 4
 
-            orderline(5) = dob
+            orderline(0, 5) = dob
 
             Console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
-'' makes sure the inputed number is appropiate if not it will loop
+            '' makes sure the inputed number is appropiate if not it will loop
             Do
 
                 invalid_mNumber = False
 
 
-                mNumber = console.ReadLine()
+                mNumber = Console.ReadLine()
 
                 If mNumber = "1" Then
-                    console.WriteLine("Hot Chocolate - 2.99
+                    Console.WriteLine("Hot Chocolate - 2.99
 Americano - 3.99
 Latte - 1.99
 Black coffee - 0.99")
 
                 ElseIf mNumber = "2" Then
-                    console.WriteLine("Iced coffee - 1.99
+                    Console.WriteLine("Iced coffee - 1.99
 Iced Moccha - 3.99
 Iced Latte - 4.99")
 
                 ElseIf mNumber = "3" Then
-                    console.WriteLine("Pan au chocolate - 0.99
+                    Console.WriteLine("Pan au chocolate - 0.99
 Crossaint - 1.99
 Cinnamon Bun - 3.50")
 
@@ -294,9 +319,9 @@ Cinnamon Bun - 3.50")
 
 
 
-                console.WriteLine("What would you like to add to your order")
+                Console.WriteLine("What would you like to add to your order")
 
-                fItem = LCase(console.ReadLine)
+                fItem = LCase(Console.ReadLine)
 
                 If fItem = "americano" Then
                     rtotal = rtotal + 3.99
@@ -349,15 +374,15 @@ Cinnamon Bun - 3.50")
                 End If
 
                 If rtotal = 0 Then
-                    console.WriteLine("Invalid input,we will resrtart the item selection process")
+                    Console.WriteLine("Invalid input,we will resrtart the item selection process")
                 End If
 
             End While
 
             Dim choc As String
 
-            console.WriteLine("Would you like to add chocolate topping for an extra 45p")
-            choc = console.ReadLine()
+            Console.WriteLine("Would you like to add chocolate topping for an extra 45p")
+            choc = Console.ReadLine()
 
             If choc = "yes" Then
                 rtotal = rtotal + 0.45
@@ -369,37 +394,37 @@ Cinnamon Bun - 3.50")
 
 
 
-            console.WriteLine("Thank you, your order total is " & rtotal & " would you like to see the menu and order again?")
-            deci = LCase(console.ReadLine())
+            Console.WriteLine("Thank you, your order total is " & rtotal & " would you like to see the menu and order again?")
+            deci = LCase(Console.ReadLine())
 
 
             If deci = "yes" Then
 
                 Do
                     invalid_mNumber2 = False
-                    console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
+                    Console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
-                    mNumber = console.ReadLine()
+                    mNumber = Console.ReadLine()
 
                     If mNumber = 1 Then
-                        console.WriteLine("Hot Chocolate - 2.99
+                        Console.WriteLine("Hot Chocolate - 2.99
 Americano - 3.99
 Latte - 1.99
 Black coffee - 0.99")
 
                     ElseIf mNumber = 2 Then
-                        console.WriteLine("Iced coffee - 1.99
+                        Console.WriteLine("Iced coffee - 1.99
 Iced Moccha - 3.99
 Iced Latte - 4.99")
 
                     ElseIf mNumber = 3 Then
-                        console.WriteLine("Pan au chocolate - 0.99
+                        Console.WriteLine("Pan au chocolate - 0.99
 Crossaint - 1.99
 Cinnamon Bun - 3.50")
 
                     Else
                         invalid_mNumber2 = True
-                        console.WriteLine("Invalid input try again")
+                        Console.WriteLine("Invalid input try again")
 
 
 
@@ -409,9 +434,9 @@ Cinnamon Bun - 3.50")
 
 
 
-                console.WriteLine("What would you like to add to your order")
+                Console.WriteLine("What would you like to add to your order")
 
-                fItem = LCase(console.ReadLine())
+                fItem = LCase(Console.ReadLine())
 
                 If fItem = "americano" Then
                     rtotal = rtotal + 3.99
@@ -461,7 +486,7 @@ Cinnamon Bun - 3.50")
 
 
             Else
-                console.WriteLine("Thank you for your order")
+                Console.WriteLine("Thank you for your order")
 
 
 
@@ -469,6 +494,8 @@ Cinnamon Bun - 3.50")
 
             End If
 
+
+            orderline(0, 6) = rtotal
             Dim cash As Single
             Dim change As Single
             Dim pMeth As String
@@ -478,7 +505,7 @@ Cinnamon Bun - 3.50")
 
             Const TAX As Single = 1.2
 
-            taxedtotal = rtotal * 1.2
+            taxedtotal = rtotal * TAX
 
 
             Dim identifier As String
@@ -494,22 +521,22 @@ Cinnamon Bun - 3.50")
 
 
 
-'' prints out a reciept
-            console.WriteLine("Name: " & UCase(identifier))
-            console.WriteLine("Phone number: " & pNumber)
-            console.WriteLine("Post code : " & pCOde)
-            console.WriteLine("Your order total is " & FormatNumber(taxedtotal), 2)
-            console.WriteLine("Your account refrence number is " & reference)
+            '' prints out a reciept
+            Console.WriteLine("Name: " & UCase(identifier))
+            Console.WriteLine("Phone number: " & pNumber)
+            Console.WriteLine("Post code : " & pCOde)
+            Console.WriteLine("Your order total is " & FormatNumber(taxedtotal), 2)
+            Console.WriteLine("Your account refrence number is " & reference)
 
             Dim tipdec As String
 
 
-'' if the total is less than 10 it will ask for a 5% tip
+            '' if the total is less than 10 it will ask for a 5% tip
 
             If rtotal < 10 Then
 
-                console.WriteLine("Would you like to add a 5% tip today?(Y/N)")
-                tipdec = LCase(console.ReadLine())
+                Console.WriteLine("Would you like to add a 5% tip today?(Y/N)")
+                tipdec = LCase(Console.ReadLine())
             End If
 
 
@@ -520,8 +547,8 @@ Cinnamon Bun - 3.50")
 
                 ' add 5% to the total to make for tip
                 taxedtotal = rtotal * 1.05
-                console.WriteLine("Your new total is " & FormatNumber(taxedtotal), 2)
-'' refers to "you would of payed xyz" submodule 
+                Console.WriteLine("Your new total is £" & FormatNumber(taxedtotal), 2)
+                '' refers to "you would of payed xyz" submodule 
             Else
                 pTip(taxedtotal)
 
@@ -530,7 +557,7 @@ Cinnamon Bun - 3.50")
             Dim Sdiscount As String
 
 
-' student submodule
+            ' student submodule
             studentDiscount(taxedtotal)
 
 
@@ -541,24 +568,24 @@ Cinnamon Bun - 3.50")
 
 
 
-            Console.WriteLine("Your final total is " & FormatNumber(taxedtotal), 2)
+            Console.WriteLine("Your final total is £" & FormatNumber(taxedtotal), 2)
             Console.WriteLine("would you like to pay cash or card")
-            dim p_decision as string = LCase(console.ReadLine())
-            if p_decision = "cash" Then
-                
+            Dim p_decision As String = LCase(Console.ReadLine())
+            If p_decision = "cash" Then
+
                 p_cash()
-                
-                
-                else
-                    Console.writeline("Press <ENTER> to input your card")
-                    Console.ReadLine()
+
+
+            Else
+                Console.WriteLine("Press <ENTER> to input your card")
+                Console.ReadLine()
             End If
 
-            console.WriteLine("Transaction Approved")
+            Console.WriteLine("Transaction Approved")
 
-            console.WriteLine("Have a nice day,dont forget to give us a review on google.")
+            Console.WriteLine("Have a nice day,dont forget to give us a review on google.")
 
-            console.WriteLine("Would you like the program to loop?")
+            Console.WriteLine("Would you like the program to loop?")
 
             lop = Console.ReadLine()
 
@@ -568,11 +595,15 @@ Cinnamon Bun - 3.50")
 
             lop = UCase(lop)
 
+            If lop = "YES" Then
+                array_3d = array_3d + 1
+            End If
+
 
         Loop Until lop = "NO"
-        index = 1
+        index = 0
 
-        For index = 1 To 6
+        For index = 0 To 6
             Console.WriteLine(orderline(index))
         Next
         ' Orderline 1 is phone number
@@ -581,11 +612,11 @@ Cinnamon Bun - 3.50")
         ' orderline 4 is second name
         ' orderline 5 is dob
         ' orderline 6 is taxedtotal
-        
+
 
         Console.WriteLine("Press <ENTER> to terminate program")
-        console.ReadLine()
-        
+        Console.ReadLine()
+
 
     End Sub
 
