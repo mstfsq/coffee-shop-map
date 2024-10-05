@@ -29,6 +29,7 @@
     ' orderline 5 is dob
     ' orderline 6 is taxedtotal
     Dim array_3d As Integer = 0
+ 
 
 
 
@@ -192,6 +193,12 @@
 
 
         security()
+        
+        
+        
+        if array_3d >= 1 Then
+            Console.WriteLine("this is loop numner: " & array_3d)
+        End If
 
 
 
@@ -199,6 +206,8 @@
 
 
         Do
+         
+            
             rtotal = 0
 
             Console.WriteLine("Welcome to M's Coffee.Could you please provide your phone number?")
@@ -214,7 +223,7 @@
                 '' loops untill the input is real and less than/equal to 11 digits
             Loop Until pNumber <> "" And Len(pNumber) <= 11
 
-            orderline(0, 1) = pNumber
+            orderline(array_3d, 1) = pNumber
 
             Do
                 Console.WriteLine("And please could you also input your postcode ?")
@@ -223,7 +232,7 @@
 
             Loop Until pCOde <> ""
 
-            orderline(0, 2) = pCOde
+            orderline(array_3d, 2) = pCOde
 
 
 
@@ -248,7 +257,7 @@
 
             Loop Until firstdName <> "" And lofname < 10
 
-            orderline(0, 3) = firstdName
+            orderline(array_3d, 3) = firstdName
 
             Console.WriteLine("What is the second name for the delivery?")
             ' loops unill second name has real input
@@ -260,7 +269,7 @@
 
             Loop Until secondDname <> ""
 
-            orderline(0, 4) = secondDname
+            orderline(array_3d, 4) = secondDname
 
             Console.WriteLine("Please input DOB in format DDMM")
 
@@ -273,7 +282,7 @@
                 End If
             Loop Until dob <> "" And Len(dob) = 4
 
-            orderline(0, 5) = dob
+            orderline(array_3d, 5) = dob
 
             Console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
@@ -495,7 +504,7 @@ Cinnamon Bun - 3.50")
             End If
 
 
-            orderline(0, 6) = rtotal
+            
             Dim cash As Single
             Dim change As Single
             Dim pMeth As String
@@ -589,7 +598,7 @@ Cinnamon Bun - 3.50")
 
             lop = Console.ReadLine()
 
-            orderline(6) = taxedtotal
+            orderline(array_3d,6) = taxedtotal
 
 
 
@@ -600,19 +609,22 @@ Cinnamon Bun - 3.50")
             End If
 
 
-        Loop Until lop = "NO"
-        index = 0
+        Loop Until lop = "NO" or array_3d = 5
+        
+  
+            
+            
+            for aCounter = 0 to 4 
+                Console.WriteLine()
+                for bCounter = 0 to 6
+                    Console.WriteLine(orderline(aCounter,bCounter))
+                Next
+            Next
+            
+   
+        
 
-        For index = 0 To 6
-            Console.WriteLine(orderline(index))
-        Next
-        ' Orderline 1 is phone number
-        ' orderline 2 is postcode
-        ' orderline 3 is first name
-        ' orderline 4 is second name
-        ' orderline 5 is dob
-        ' orderline 6 is taxedtotal
-
+      
 
         Console.WriteLine("Press <ENTER> to terminate program")
         Console.ReadLine()
