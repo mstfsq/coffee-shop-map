@@ -21,6 +21,7 @@
     Dim invalid_mNumber2 As Boolean
     Dim orderline(4, 6) As String
     Dim index, ArrayCounter As Integer
+    ' array has 5 rows (0-4)
     ' orderline 0 is the total
     ' orderline 1 is phone number
     ' orderline 2 is postcode
@@ -155,7 +156,7 @@
     End Sub
 
 
-    ' if users id number starts with 'd' it will apply student discount
+    ' if users id number starts with 'd' it will apply student discount and it uses ByRef
     Sub studentDiscount(ByRef taxedtotal)
         Console.WriteLine("Please enter your ID Number,press <enter> if you do not have one")
         Dim id_number As String = Console.ReadLine()
@@ -187,7 +188,7 @@
 
 
 
-    ' main program
+    ' MAIN PROGRAM BEGINS HERE
     Sub Main()
 
 
@@ -196,7 +197,7 @@
         
         
         
-        if array_3d >= 1 Then
+        if array_3d <> 0 Then
             Console.WriteLine("this is loop numner: " & array_3d)
         End If
 
