@@ -19,17 +19,11 @@
     Dim counter1 As Integer
     Dim invalid_mNumber As Boolean
     Dim invalid_mNumber2 As Boolean
-    Dim orderline(4, 6) As String
+    Dim orderline(4, 5) As String
     Dim index, ArrayCounter As Integer
-    ' array has 5 rows (0-4)
-    ' orderline 0 is the total
-    ' orderline 1 is phone number
-    ' orderline 2 is postcode
-    ' orderline 3 is first name
-    ' orderline 4 is second name
-    ' orderline 5 is dob
-    ' orderline 6 is taxedtotal
     Dim array_3d As Integer = 0
+    dim orderline_info as string
+    
  
 
 
@@ -224,7 +218,7 @@
                 '' loops untill the input is real and less than/equal to 11 digits
             Loop Until pNumber <> "" And Len(pNumber) <= 11
 
-            orderline(array_3d, 1) = pNumber
+            orderline(array_3d, 0) = pNumber
 
             Do
                 Console.WriteLine("And please could you also input your postcode ?")
@@ -233,7 +227,7 @@
 
             Loop Until pCOde <> ""
 
-            orderline(array_3d, 2) = pCOde
+            orderline(array_3d, 1) = pCOde
 
 
 
@@ -258,7 +252,7 @@
 
             Loop Until firstdName <> "" And lofname < 10
 
-            orderline(array_3d, 3) = firstdName
+            orderline(array_3d, 2) = firstdName
 
             Console.WriteLine("What is the second name for the delivery?")
             ' loops unill second name has real input
@@ -270,7 +264,7 @@
 
             Loop Until secondDname <> ""
 
-            orderline(array_3d, 4) = secondDname
+            orderline(array_3d, 3) = secondDname
 
             Console.WriteLine("Please input DOB in format DDMM")
 
@@ -283,7 +277,7 @@
                 End If
             Loop Until dob <> "" And Len(dob) = 4
 
-            orderline(array_3d, 5) = dob
+            orderline(array_3d, 4) = dob
 
             Console.WriteLine("Please enter which menu you would like to view 1)Hot drinks 2)Cold drinks 3)Pastries")
 
@@ -545,7 +539,7 @@ Cinnamon Bun - 3.50")
 
             If rtotal < 10 Then
 
-                Console.WriteLine("Would you like to add a 5% tip today?(Y/N)")
+                Console.WriteLine("Would you like to add a 5% tip today?")
                 tipdec = LCase(Console.ReadLine())
             End If
 
@@ -599,7 +593,7 @@ Cinnamon Bun - 3.50")
 
             lop = Console.ReadLine()
 
-            orderline(array_3d,6) = taxedtotal
+            orderline(array_3d,5) = taxedtotal
 
 
 
@@ -610,18 +604,42 @@ Cinnamon Bun - 3.50")
             End If
 
 
+            
         Loop Until lop = "NO" or array_3d = 5
         
   
             
             
-            for aCounter = 0 to 4 
+            for aCounter = 0 to array_3d 
                 Console.WriteLine()
-                for bCounter = 0 to 6
-                    Console.WriteLine(orderline(aCounter,bCounter))
+                for bCounter = 0 to 5
+                    if bCounter = 0 Then
+                        orderline_info = "Phone: "
+                        else if bCounter = 1 Then
+                            orderline_info = "PostCode: "
+                     elseif bcounter = 2 Then
+                         orderline_info = "First Name: "
+                         else if bCounter = 3 Then
+                             orderline_info = "Second Name"
+                             
+                             elseif bCounter = 4 Then
+                                 orderline_info = "Date Of Birth: "
+                                 
+                                 ElseIf bCounter = 5 Then
+                                     orderline_info = "Total: £"
+                            
+
+                    End If
+                    Console.WriteLine(orderline_info & "   " & orderline(aCounter,bCounter))
                 Next
             Next
         
+        ' orderline 0 is phone number
+        ' orderline 1 is postcode
+        ' orderline 2 is first name
+        ' orderline 3 is second name
+        ' orderline 4 is dob
+        ' orderline 5 is taxedtotal
         
             
    
