@@ -1,4 +1,10 @@
-﻿Module Module1
+﻿Imports System.IO
+
+
+Module Module1
+
+
+
 
     Dim pNumber As String
     Dim pCOde As String
@@ -22,9 +28,10 @@
     Dim orderline(4, 5) As String
     Dim index, ArrayCounter As Integer
     Dim array_3d As Integer = 0
-    dim orderline_info as string
-    
- 
+    Dim orderline_info As String
+
+
+
 
 
 
@@ -36,6 +43,7 @@
         Dim change_due As Single
         Dim moneyOwed As Single
         Dim money_given As Single
+
 
 
         ' displays how much the customer needs to owe
@@ -188,10 +196,10 @@
 
 
         security()
-        
-        
-        
-        if array_3d <> 0 Then
+
+
+
+        If array_3d <> 0 Then
             Console.WriteLine("this is loop numner: " & array_3d)
         End If
 
@@ -201,8 +209,8 @@
 
 
         Do
-         
-            
+
+
             rtotal = 0
 
             Console.WriteLine("Welcome to M's Coffee.Could you please provide your phone number?")
@@ -225,15 +233,20 @@
                 pCOde = Console.ReadLine()
                 ' loops untill there is real input for postcode
 
+
+
+
+
             Loop Until pCOde <> ""
 
             orderline(array_3d, 1) = pCOde
 
 
 
-
+            'capitalises first letter
             Console.WriteLine("What is the first name for the delivery?")
-            firstdName = Console.ReadLine()
+            firstdName = LCase(Console.ReadLine())
+            firstdName = UCase(Mid(firstdName, 1, 1)) & Mid(firstdName, 2)
 
 
             '' loops untill legnth of first name is less than 10 and has real input
@@ -257,7 +270,9 @@
             Console.WriteLine("What is the second name for the delivery?")
             ' loops unill second name has real input
             Do
-                secondDname = Console.ReadLine()
+                'capitalises first letter
+                secondDname = LCase(Console.ReadLine())
+                secondDname = UCase(Mid(secondDname, 1, 1)) & Mid(secondDname, 2)
                 If secondDname = "" Then
                     Console.WriteLine("Invalid input,please try again")
                 End If
@@ -276,6 +291,9 @@
                     Console.WriteLine("Invlaid DOB input,please make sure the format is DDMM")
                 End If
             Loop Until dob <> "" And Len(dob) = 4
+
+            ' adds a / in between DOB
+            dob = Mid(dob, 1, 2) & "/" & Mid(dob, 3, 2)
 
             orderline(array_3d, 4) = dob
 
@@ -327,6 +345,8 @@ Cinnamon Bun - 3.50")
 
                 fItem = LCase(Console.ReadLine)
 
+
+                ' pricce list
                 If fItem = "americano" Then
                     rtotal = rtotal + 3.99
 
@@ -387,7 +407,7 @@ Cinnamon Bun - 3.50")
 
             Console.WriteLine("Would you like to add chocolate topping for an extra 45p")
             choc = Console.ReadLine()
-
+            'extras
             If choc = "yes" Then
                 rtotal = rtotal + 0.45
             End If
@@ -491,161 +511,124 @@ Cinnamon Bun - 3.50")
 
             Else
                 Console.WriteLine("Thank you for your order")
-
-
-
-
-
             End If
 
 
-            
-            Dim cash As Single
-            Dim change As Single
-            Dim pMeth As String
-            Dim tipD As String
-            Dim ntotal As Single
 
-
+            ' declares constant forr  tax
             Const TAX As Single = 1.2
-
+            ' applies the tax
             taxedtotal = rtotal * TAX
 
-
+            ' creates a local variable for indentifer
             Dim identifier As String
             identifier = "MR " & Mid(firstdName, 1, 1) & secondDname
-
+            'account ref concat using DOB and indetifier
             Dim reference As String
-
-            'account ref concat
-
             reference = UCase(Mid(firstdName, 1, 1)) & UCase(secondDname) & dob
-
-
-
-
-
             '' prints out a reciept
             Console.WriteLine("Name: " & UCase(identifier))
             Console.WriteLine("Phone number: " & pNumber)
             Console.WriteLine("Post code : " & pCOde)
             Console.WriteLine("Your order total is " & FormatNumber(taxedtotal), 2)
             Console.WriteLine("Your account refrence number is " & reference)
-
+            ' declares a variable to store users choice to tip
             Dim tipdec As String
-
-
             '' if the total is less than 10 it will ask for a 5% tip
-
             If rtotal < 10 Then
-
                 Console.WriteLine("Would you like to add a 5% tip today?")
                 tipdec = LCase(Console.ReadLine())
             End If
-
-
-
-
-
+            ' if they want to tip it adds 5% to their total
             If tipdec = "yes" Then
-
                 ' add 5% to the total to make for tip
-                taxedtotal = rtotal * 1.05
+                taxedtotal = taxedtotal * 1.05
                 Console.WriteLine("Your new total is £" & FormatNumber(taxedtotal), 2)
                 '' refers to "you would of payed xyz" submodule 
             Else
                 pTip(taxedtotal)
 
             End If
-
-            Dim Sdiscount As String
-
-
             ' student submodule
             studentDiscount(taxedtotal)
-
-
-
-
-
-
-
-
-
+            ' tells user final total and lets them choose the payment methof
             Console.WriteLine("Your final total is £" & FormatNumber(taxedtotal), 2)
             Console.WriteLine("would you like to pay cash or card")
             Dim p_decision As String = LCase(Console.ReadLine())
             If p_decision = "cash" Then
 
+                'calls cash payment method
                 p_cash()
 
-
+                ' card payment confirmation(need to make a way to change the choice again)
             Else
                 Console.WriteLine("Press <ENTER> to input your card")
                 Console.ReadLine()
             End If
-
             Console.WriteLine("Transaction Approved")
-
             Console.WriteLine("Have a nice day,dont forget to give us a review on google.")
-
             Console.WriteLine("Would you like the program to loop?")
 
+            ' stores decision to loop 
             lop = Console.ReadLine()
-
-            orderline(array_3d,5) = taxedtotal
-
-
-
+            'formats total to 2DP
+            orderline(array_3d, 5) = FormatNumber(taxedtotal, 2)
+            'ucases the input to avoid error
             lop = UCase(lop)
-
+            ' if the user want to loop it adds 1 to the array counter and then goes back to the start of the program
             If lop = "YES" Then
                 array_3d = array_3d + 1
             End If
 
 
-            
-        Loop Until lop = "NO" or array_3d = 5
-        
-  
-            
-            
-            for aCounter = 0 to array_3d 
-                Console.WriteLine()
-                for bCounter = 0 to 5
-                    if bCounter = 0 Then
-                        orderline_info = "Phone: "
-                        else if bCounter = 1 Then
-                            orderline_info = "PostCode: "
-                     elseif bcounter = 2 Then
-                         orderline_info = "First Name: "
-                         else if bCounter = 3 Then
-                             orderline_info = "Second Name"
-                             
-                             elseif bCounter = 4 Then
-                                 orderline_info = "Date Of Birth: "
-                                 
-                                 ElseIf bCounter = 5 Then
-                                     orderline_info = "Total: £"
-                            
+            ' loops the whole progam untill they dont want to loop OR the array counter goes over 3
+        Loop Until lop = "NO" Or array_3d = 5
 
-                    End If
-                    Console.WriteLine(orderline_info & "   " & orderline(aCounter,bCounter))
-                Next
+        Dim sw As New StreamWriter("orders.txt", True)
+
+        sw.WriteLine("-----------------------------------------------------------------------------------------------")
+
+        For aCounter = 0 To array_3d
+            Console.WriteLine()
+            For bCounter = 0 To 5
+                If bCounter = 0 Then
+                    orderline_info = "Phone:"
+                ElseIf bCounter = 1 Then
+                    orderline_info = "Postcode:"
+                ElseIf bCounter = 2 Then
+                    orderline_info = "First Name:"
+                ElseIf bCounter = 3 Then
+                    orderline_info = "Second Name"
+
+                ElseIf bCounter = 4 Then
+                    orderline_info = "Date Of Birth:"
+
+                ElseIf bCounter = 5 Then
+                    orderline_info = "Total: £"
+
+
+                End If
+                Console.WriteLine(orderline_info & "   " & orderline(aCounter, bCounter))
+                sw.WriteLine(orderline_info & "   " & orderline(aCounter, bCounter))
             Next
-        
+        Next
+        sw.Close()
+
+
         ' orderline 0 is phone number
         ' orderline 1 is postcode
         ' orderline 2 is first name
         ' orderline 3 is second name
         ' orderline 4 is dob
         ' orderline 5 is taxedtotal
-        
-            
-   
-        
 
-      
+
+
+
+
+
+
+
 
         Console.WriteLine("Press <ENTER> to terminate program")
         Console.ReadLine()
