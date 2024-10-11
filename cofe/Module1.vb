@@ -2,10 +2,6 @@
 
 
 Module Module1
-
-
-
-
     Dim pNumber As String
     Dim pCOde As String
     Dim firstdName As String
@@ -29,11 +25,6 @@ Module Module1
     Dim index, ArrayCounter As Integer
     Dim array_3d As Integer = 0
     Dim orderline_info As String
-
-
-
-
-
 
     '' cash payment system
 
