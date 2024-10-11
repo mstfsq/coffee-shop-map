@@ -26,6 +26,8 @@ Module Module1
     Dim array_3d As Integer = 0
     Dim orderline_info As String
 
+
+
     '' cash payment system
 
 
@@ -86,21 +88,8 @@ Module Module1
                     Console.WriteLine("Your change is £" & FormatNumber(moneyOwed, 2) * -1)
                 End If
             End If
-
-
-
         End If
-
-
-
     End Sub
-
-
-
-
-
-
-
     '' password check at the start of the program
     Sub security()
         counter1 = 0
@@ -116,8 +105,6 @@ Module Module1
 
             Loop Until counter1 = 3 Or password = correctPassword
 
-
-
             If password = correctPassword Then
                 Console.WriteLine("Correct password entered.Welcome")
 
@@ -129,14 +116,7 @@ Module Module1
 
             End If
 
-
-
-
-
         End If
-
-
-
 
     End Sub
     '' if user does not tip this tells them how much they would of paid with the tip and it used ByVal
@@ -144,8 +124,6 @@ Module Module1
     Sub pTip(ByVal taxedtotal)
         Dim tip_amount As Single = taxedtotal * 1.05
         Console.WriteLine("If you would of gave a tip your total would of been £" & FormatNumber(tip_amount, 2))
-
-
     End Sub
 
 
@@ -160,44 +138,21 @@ Module Module1
 
         ElseIf id_number = "" Then
 
-
-
-
         Else
             Console.WriteLine("Unfortuately you are not eligible for the student discount")
             taxedtotal = taxedtotal
-
-
-
-
-
-
-
         End If
-
-
-
     End Sub
 
 
 
     ' MAIN PROGRAM BEGINS HERE
     Sub Main()
-
-
-
         security()
-
-
 
         If array_3d <> 0 Then
             Console.WriteLine("this is loop numner: " & array_3d)
         End If
-
-
-
-
-
 
         Do
 
@@ -224,16 +179,9 @@ Module Module1
                 pCOde = Console.ReadLine()
                 ' loops untill there is real input for postcode
 
-
-
-
-
             Loop Until pCOde <> ""
 
             orderline(array_3d, 1) = pCOde
-
-
-
             'capitalises first letter
             Console.WriteLine("What is the first name for the delivery?")
             firstdName = LCase(Console.ReadLine())
@@ -318,75 +266,35 @@ Cinnamon Bun - 3.50")
                     ' if the input is invalid (not on the menu) it will let the boolean variable be true
                     invalid_mNumber = True
                     Console.WriteLine("Invalid Input,Try again")
-
-
-
-
                 End If
                 ' post conditioned loop - will loop aslong as input is invalid
             Loop While invalid_mNumber = True
 
-
-
-
             While rtotal = 0
 
-
-
                 Console.WriteLine("What would you like to add to your order")
-
                 fItem = LCase(Console.ReadLine)
-
-
                 ' pricce list
                 If fItem = "americano" Then
                     rtotal = rtotal + 3.99
-
-
-
                 ElseIf fItem = "latte" Then
                     rtotal = rtotal + 1.99
-
-
-
                 ElseIf fItem = "black coffee" Then
                     rtotal = rtotal + 0.99
-
-
-
                 ElseIf fItem = "iced moccha" Then
                     rtotal = rtotal + 3.99
-
-
-
                 ElseIf fItem = "iced coffee" Then
                     rtotal = rtotal + 1.99
-
-
-
                 ElseIf fItem = "iced latte" Then
                     rtotal = rtotal + 4.99
-
-
-
                 ElseIf fItem = "crossaint" Then
                     rtotal = rtotal + 1.99
-
-
-
                 ElseIf fItem = "cinnamon bun" Then
                     rtotal = rtotal + 3.5
-
-
-
                 ElseIf fItem = "pan au chocolate" Then
                     rtotal = rtotal + 0.99
-
                 ElseIf fItem = "hot Chocolate" Then
                     rtotal = rtotal + 2.99
-
-
-
                 End If
 
                 If rtotal = 0 Then
@@ -407,15 +315,8 @@ Cinnamon Bun - 3.50")
                 rtotal = rtotal + 0.45
             End If
 
-
-
-
-
-
-
             Console.WriteLine("Thank you, your order total is " & rtotal & " would you like to see the menu and order again?")
             deci = LCase(Console.ReadLine())
-
 
             If deci = "yes" Then
 
@@ -444,14 +345,9 @@ Cinnamon Bun - 3.50")
                     Else
                         invalid_mNumber2 = True
                         Console.WriteLine("Invalid input try again")
-
-
-
                     End If
 
                 Loop While invalid_mNumber2 = True
-
-
 
                 Console.WriteLine("What would you like to add to your order")
 
@@ -459,9 +355,6 @@ Cinnamon Bun - 3.50")
 
                 If fItem = "americano" Then
                     rtotal = rtotal + 3.99
-
-
-
                 End If
 
                 If fItem = "latte" Then
@@ -507,8 +400,6 @@ Cinnamon Bun - 3.50")
             Else
                 Console.WriteLine("Thank you for your order")
             End If
-
-
 
             ' declares constant for  tax
             Const TAX As Single = 1.2
