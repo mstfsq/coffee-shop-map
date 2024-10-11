@@ -324,6 +324,7 @@ Crossaint - 1.99
 Cinnamon Bun - 3.50")
 
                 Else
+                    ' if the input is invalid (not on the menu) it will let the boolean variable be true
                     invalid_mNumber = True
                     Console.WriteLine("Invalid Input,Try again")
 
@@ -331,7 +332,7 @@ Cinnamon Bun - 3.50")
 
 
                 End If
-
+                ' post conditioned loop - will loop aslong as input is invalid
             Loop While invalid_mNumber = True
 
 
@@ -398,6 +399,7 @@ Cinnamon Bun - 3.50")
                 End If
 
                 If rtotal = 0 Then
+                    ' validation check
                     Console.WriteLine("Invalid input,we will resrtart the item selection process")
                 End If
 
@@ -405,6 +407,8 @@ Cinnamon Bun - 3.50")
 
             Dim choc As String
 
+
+            ' asks user if they want extra
             Console.WriteLine("Would you like to add chocolate topping for an extra 45p")
             choc = Console.ReadLine()
             'extras
@@ -515,7 +519,7 @@ Cinnamon Bun - 3.50")
 
 
 
-            ' declares constant forr  tax
+            ' declares constant for  tax
             Const TAX As Single = 1.2
             ' applies the tax
             taxedtotal = rtotal * TAX
@@ -588,9 +592,9 @@ Cinnamon Bun - 3.50")
 
         sw.WriteLine("-----------------------------------------------------------------------------------------------")
 
-        For aCounter = 0 To array_3d
+        For aCounter = 0 To array_3d ' loops the amount of orders made in given session
             Console.WriteLine()
-            For bCounter = 0 To 5
+            For bCounter = 0 To 5 ' loops orderlines
                 If bCounter = 0 Then
                     orderline_info = "Phone:"
                 ElseIf bCounter = 1 Then
@@ -612,24 +616,13 @@ Cinnamon Bun - 3.50")
                 sw.WriteLine(orderline_info & "   " & orderline(aCounter, bCounter))
             Next
         Next
-        sw.Close()
-
-
+        sw.Close() ' closes the streamwriter
         ' orderline 0 is phone number
         ' orderline 1 is postcode
         ' orderline 2 is first name
         ' orderline 3 is second name
         ' orderline 4 is dob
         ' orderline 5 is taxedtotal
-
-
-
-
-
-
-
-
-
         Console.WriteLine("Press <ENTER> to terminate program")
         Console.ReadLine()
 
