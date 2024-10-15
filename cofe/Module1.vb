@@ -25,6 +25,9 @@ Module Module1
     Dim index, ArrayCounter As Integer
     Dim array_3d As Integer = 0
     Dim orderline_info As String
+    Dim shopping_data() As String = File.ReadAllLines("orders.txt")
+    Dim pFunction As String
+    Dim iInput As Boolean
 
 
 
@@ -144,11 +147,57 @@ Module Module1
         End If
     End Sub
 
+    Sub order_read()
+        shopping_data = File.ReadAllLines("orders.txt")
+        For si = 0 To UBound(shopping_data)
+            Console.WriteLine(shopping_data(si))
+
+        Next
+    End Sub
+
 
 
     ' MAIN PROGRAM BEGINS HERE
     Sub Main()
         security()
+
+        Console.WriteLine("Welcome to the program,What would you like to do")
+        Console.WriteLine("1)Make order")
+        Console.WriteLine("2)View Past orders")
+        Console.WriteLine("3) Terminate program")
+
+        pFunction = Console.ReadLine
+
+
+
+
+        Do
+
+            If pFunction = "2" Then
+                order_read()
+
+                Console.WriteLine("press <ENTER> to terminate")
+                Console.ReadLine()
+                End
+
+            ElseIf pFunction = "3" Then
+                Console.WriteLine("press <ENTER> to terminate")
+                Console.ReadLine()
+                End
+
+            ElseIf pFunction = "1" Then
+
+            Else
+                Console.WriteLine("invalid input")
+                iInput = True
+                Console.WriteLine("invalid input")
+
+            End If
+
+        Loop Until iInput = False
+
+
+
 
         If array_3d <> 0 Then
             Console.WriteLine("this is loop numner: " & array_3d)
@@ -494,11 +543,15 @@ Cinnamon Bun - 3.50")
 
 
                 End If
+
+
+
                 Console.WriteLine(orderline_info & "   " & orderline(aCounter, bCounter))
                 sw.WriteLine(orderline_info & "   " & orderline(aCounter, bCounter))
             Next
         Next
         sw.Close() ' closes the streamwriter
+
         ' orderline 0 is phone number
         ' orderline 1 is postcode
         ' orderline 2 is first name
